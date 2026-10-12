@@ -56,7 +56,7 @@ A clip slide uses `"video": "/abs/path/clip.webm", "start": 0.7` instead of `cod
 - Code: copied word for word from the source, 18 lines or fewer, 100 characters or fewer per line. Skip lockfiles, generated and vendored files, and `.env` files. Never put secrets on a slide: replace any key, token or password in a hunk with `***` (the renderer also refuses common key shapes).
 - Headings: the file path for code slides, a short title otherwise.
 - Explain purpose and design. Don't read code aloud.
-- TikTok style (only if the user takes the offer in step 6 or asks): add top-level `"gameplay"` for a 1080x1920 video with the slides on top and gameplay looped, muted, underneath. Value: `"minecraft"` or `"kart"` (built-in free-licensed clips, downloaded once by the renderer, ~7–12 MB), or `"/abs/path/clip.mp4"` if the user gives their own. Never search for or download other gameplay yourself.
+- TikTok style (only if the user takes the offer in step 6 or asks): add top-level `"gameplay"` for a 1080x1920 TikTok-style video: full-screen gameplay (looped, muted), the code or clip as a card on top, and big captions one word at a time synced to the voice. Value: `"minecraft"` (Minetest) or `"kart"` (SuperTuxKart), built-in free-licensed clips downloaded once by the renderer (~13 MB), or `"/abs/path/clip.mp4"` if the user gives their own. Never search for or download other gameplay yourself.
 
 ## 5. Render
 `$PY $SKILL_DIR/make_video.py spec.json out.mp4`
@@ -65,7 +65,7 @@ A clip slide uses `"video": "/abs/path/clip.webm", "start": 0.7` instead of `cod
 - Voice: set `REPO_VIDEO_VOICE` (`af_heart` is the default, `am_michael`, `bm_george`) if the user asks for one.
 
 ## 6. Show
-Run `open out.mp4` and tell the user the path. Offer once: "Want a TikTok-style vertical version with gameplay underneath? Minecraft-style or kart racing (or your own clip)." On a yes, add `"gameplay"` (step 4) and render again to `out-tiktok.mp4`.
+Run `open out.mp4` and tell the user the path. Offer once: "Want a TikTok-style version (full-screen gameplay, big word-by-word captions)? Minecraft-style or kart racing, or your own clip." On a yes, add `"gameplay"` (step 4) and render again to `out-tiktok.mp4`.
 - Overview mode: done. Offer to copy it somewhere if they want to keep it.
 - PR mode: ask "Attach this to the PR?" Do nothing else without a yes.
 
