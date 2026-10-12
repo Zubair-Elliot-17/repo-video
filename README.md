@@ -27,13 +27,7 @@ Both made from the same [AI-CD](https://github.com/Zubair-Elliot-17/AI-CD) overv
 
 ### Watch with sound
 
-**Overview**
-
 https://github.com/user-attachments/assets/d4270693-c0bb-4216-b7dc-0f81771bb2e0
-
-**TikTok mode**
-
-TIKTOK_VIDEO_URL
 
 ## Install
 
