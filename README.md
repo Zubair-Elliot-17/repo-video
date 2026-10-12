@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/d4270693-c0bb-4216-b7dc-0f81771bb2e0
 
 | | |
 |---|---|
-| **Output** | One 1280×720 MP4 with narration and burned-in captions, 120 seconds or less |
+| **Output** | One 1280×720 MP4 with narration and burned-in captions, 120 seconds or less (1080×1920 in TikTok mode) |
 | **Length** | 6–9 slides, about 210 words of narration (roughly 40–90 seconds) |
 | **Slides** | Code copied word for word from the source (diff hunks in PR mode), file paths as headings, or live-site clips |
 | **First run** | Downloads about 350 MB (voice model, Chromium) |
@@ -37,6 +37,8 @@ In Claude Code:
 
 - **PR / MR mode**: what changed and why, the key hunks, and what a reviewer should check.
 - **Overview mode**: what the project is, how to run it, its structure, 3–5 key files, how data flows through it, and where a new contributor should start. If the project has a live site, Claude asks whether to record clips from it.
+
+**TikTok mode** (optional): after a render, Claude offers a vertical 1080×1920 version with the slides on top and gameplay looping underneath, Subway Surfers or Minecraft parkour style. Bring your own clip (any length, it loops and is muted); the skill doesn't ship or download gameplay footage. By hand, add `"gameplay": "/abs/path/clip.mp4"` to `spec.json`.
 
 Pick a different voice with `REPO_VIDEO_VOICE` (`af_heart` default, `am_michael`, `bm_george`).
 
