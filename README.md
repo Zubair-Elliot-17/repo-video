@@ -17,11 +17,11 @@ Both made from the same [AI-CD](https://github.com/Zubair-Elliot-17/AI-CD) overv
 <table>
   <tr>
     <th>Overview (1280×720)</th>
-    <th>TikTok mode, <code>minecraft</code> preset (720×1280)</th>
+    <th>TikTok mode, <code>minecraft</code> preset (1080×1920)</th>
   </tr>
   <tr>
     <td><a href="#watch-with-sound"><img src="docs/example-preview.gif" alt="Overview video: the AI-CD detector live, then a code walkthrough"></a></td>
-    <td align="center"><a href="#watch-with-sound"><img src="docs/example-tiktok.gif" width="220" alt="TikTok mode: AI-CD slides on top, MineClone2 gameplay looping underneath"></a></td>
+    <td align="center"><a href="#watch-with-sound"><img src="docs/example-tiktok.gif" width="220" alt="TikTok mode: full-screen Minetest gameplay, an AI-CD card on top, big word-by-word captions"></a></td>
   </tr>
 </table>
 
@@ -84,15 +84,15 @@ It never puts secrets on a slide (the renderer refuses common key and token shap
 
 ## TikTok mode
 
-After a render, Claude offers a vertical version: the slides on top, gameplay looping silently underneath. Pick a preset, there's nothing to go and find:
+After a render, Claude offers a TikTok-style version (1080×1920): full-screen gameplay, the code or live-site clip as a card on top, and big captions that pop up one word at a time in sync with the voice. Pick a preset, there's nothing to go and find:
 
 | Preset | Gameplay |
 |---|---|
-| `minecraft` | MineClone2, a free Minecraft-like game |
+| `minecraft` | Minetest, a free Minecraft-like game |
 | `kart` | SuperTuxKart racing |
 | a file path | Your own clip, any length |
 
-Presets download once (7–12 MB, checksum-verified) into `gameplay/` and are reused after that. To use it by hand, add `"gameplay": "minecraft"` to `spec.json`.
+Presets download once (about 13 MB each, checksum-verified) into `gameplay/` and are reused after that. To use it by hand, add `"gameplay": "minecraft"` to `spec.json`.
 
 ## How it works
 
@@ -126,7 +126,7 @@ The renderer also works on its own:
 
 ## Credits
 
-The TikTok-mode presets are trimmed, cropped and muted, with the credit burned in, and hosted in the [gameplay-v1 release](https://github.com/Zubair-Elliot-17/repo-video/releases/tag/gameplay-v1). Both are [CC BY 3.0](https://creativecommons.org/licenses/by/3.0):
+The TikTok-mode presets are trimmed, cropped and muted, with the credit burned in, and hosted in the [gameplay-v2 release](https://github.com/Zubair-Elliot-17/repo-video/releases/tag/gameplay-v2):
 
-- `minecraft`: [MineClone2: Release 0.84](https://commons.wikimedia.org/wiki/File:MineClone2_-_Release_0.84_-_The_Very_Nice_Release.webm) by VoxeLibre
-- `kart`: [SuperTuxKart 2.x GP](https://commons.wikimedia.org/wiki/File:SuperTuxKart_2.x_GP_with_24%25_handicap_and_road_tracks_(open_source_Mario_Kart-like_Linux_game).webm) by kimden STK
+- `minecraft`: [Minetest 5.6.1, first 8 minutes](https://commons.wikimedia.org/wiki/File:Minetest_5.6.1_2022.12.27_-_18.35.07.05,_erste_8_Minuten,_Teil_1_von_2.webm) by PantheraLeo1359531, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) (the cropped clip is shared under the same licence)
+- `kart`: [SuperTuxKart 2.x GP](https://commons.wikimedia.org/wiki/File:SuperTuxKart_2.x_GP_with_24%25_handicap_and_road_tracks_(open_source_Mario_Kart-like_Linux_game).webm) by kimden STK, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)
