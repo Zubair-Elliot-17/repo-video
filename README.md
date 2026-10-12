@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/d4270693-c0bb-4216-b7dc-0f81771bb2e0
 
 | | |
 |---|---|
-| **Output** | One 1280×720 MP4 with narration and burned-in captions, 120 seconds or less |
+| **Output** | One 1280×720 MP4 with narration and burned-in captions, 120 seconds or less (1080×1920 in TikTok mode) |
 | **Length** | 6–9 slides, about 210 words of narration (roughly 40–90 seconds) |
 | **Slides** | Code copied word for word from the source (diff hunks in PR mode), file paths as headings, or live-site clips |
 | **First run** | Downloads about 350 MB (voice model, Chromium) |
@@ -37,6 +37,16 @@ In Claude Code:
 
 - **PR / MR mode**: what changed and why, the key hunks, and what a reviewer should check.
 - **Overview mode**: what the project is, how to run it, its structure, 3–5 key files, how data flows through it, and where a new contributor should start. If the project has a live site, Claude asks whether to record clips from it.
+
+**TikTok mode** (optional): after a render, Claude offers a vertical 1080×1920 version with the slides on top and gameplay looping underneath. Just pick one, nothing to find:
+
+| Preset | Clip |
+|---|---|
+| `minecraft` | MineClone2 (a free Minecraft-like game) |
+| `kart` | SuperTuxKart racing |
+| a file path | Your own clip, any length (it loops, muted) |
+
+Presets download once (7–12 MB, checksum-verified) into `gameplay/` and are reused after that. By hand, add `"gameplay": "minecraft"` to `spec.json`.
 
 Pick a different voice with `REPO_VIDEO_VOICE` (`af_heart` default, `am_michael`, `bm_george`).
 
@@ -65,6 +75,13 @@ ln -s "$PWD/repo-video" ~/.claude/skills/repo-video
 | `record_site.py` | Steps file → screen-recording clip |
 | `setup.sh` | One-time install and voice test |
 | `BUILD-GUIDE.md`, `PLAN.md` | Design notes |
+
+## Credits
+
+The TikTok-mode presets are trimmed, cropped, muted clips with the credit burned in, hosted in the [gameplay-v1 release](https://github.com/Zubair-Elliot-17/repo-video/releases/tag/gameplay-v1). Both are [CC BY 3.0](https://creativecommons.org/licenses/by/3.0):
+
+- `minecraft`: [MineClone2: Release 0.84](https://commons.wikimedia.org/wiki/File:MineClone2_-_Release_0.84_-_The_Very_Nice_Release.webm) by VoxeLibre
+- `kart`: [SuperTuxKart 2.x GP](https://commons.wikimedia.org/wiki/File:SuperTuxKart_2.x_GP_with_24%25_handicap_and_road_tracks_(open_source_Mario_Kart-like_Linux_game).webm) by kimden STK
 
 The renderer can also be run by hand:
 

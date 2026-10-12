@@ -4,3 +4,4 @@ __pycache__/
 .browser-profile/
 setup.log
 !docs/*.mp4
+gameplay/
