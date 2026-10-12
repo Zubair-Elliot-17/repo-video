@@ -10,6 +10,10 @@ An 81-second overview of [AI-CD](https://github.com/Zubair-Elliot-17/AI-CD), mad
 
 https://github.com/user-attachments/assets/d4270693-c0bb-4216-b7dc-0f81771bb2e0
 
+The same overview in TikTok mode with the `minecraft` preset (`"gameplay": "minecraft"`), 1080×1920. Click for the full 81-second video:
+
+<a href="docs/example-tiktok.mp4"><img src="docs/example-tiktok.gif" width="270" alt="TikTok mode: AI-CD slides on top, MineClone2 gameplay looping underneath"></a>
+
 ## What to expect
 
 | | |
