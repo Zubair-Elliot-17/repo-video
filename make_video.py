@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """spec.json -> narrated 1280x720 MP4 (1080x1920 with "gameplay"). Usage: make_video.py spec.json out.mp4 | --selftest"""
-import glob
+import glob, hashlib, urllib.request
 import io, json, os, re, subprocess, sys, tempfile, textwrap
 import numpy as np, soundfile as sf
 from PIL import Image, ImageDraw, ImageFont
@@ -22,6 +22,11 @@ VOICE = os.environ.get("REPO_VIDEO_VOICE", "af_heart")
 MAX_SENTENCE = 140  # longer captions would be cut off at two lines
 CLIP_TYPES = (".webm", ".mp4", ".mov")
 TALL_W, TALL_H = 1080, 1920  # vertical layout: slides on top, gameplay below
+# Free-licensed (CC BY 3.0) clips with the credit burned in; downloaded once, then cached.
+GAMEPLAY_URL = "https://github.com/Zubair-Elliot-17/repo-video/releases/download/gameplay-v1/"
+GAMEPLAY = {"minecraft": "7f487505032fbabac84f2d5078d725bdc7f88a628253ccf2d8a3be7c2ee9da8c",
+            "kart": "ac2be564e3e92fbcbbf348f955bd21f69c4a1d8e7058bff33fb2c67a977bca9e"}
+GAMEPLAY_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gameplay")
 # Common credential shapes; a hit stops the render so a key never ends up in a video.
 SECRET = re.compile(r"AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_\w{30,}|glpat-[\w-]{20,}"
                     r"|xox[abpr]-[\w-]{10,}|sk-[A-Za-z0-9_-]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY")
@@ -70,8 +75,8 @@ def validate(spec):
         raise ValueError("spec needs a non-empty 'slides' list")
     if "gameplay" in spec:
         game = str(spec["gameplay"])
-        if not game.lower().endswith(CLIP_TYPES) or not os.path.isfile(game):
-            raise ValueError(f"gameplay must be an existing {'/'.join(CLIP_TYPES)} file")
+        if game not in GAMEPLAY and (not game.lower().endswith(CLIP_TYPES) or not os.path.isfile(game)):
+            raise ValueError(f"gameplay must be {' or '.join(GAMEPLAY)}, or an existing {'/'.join(CLIP_TYPES)} file")
     for i, s in enumerate(slides, 1):
         if not isinstance(s, dict) or not str(s.get("heading", "")).strip():
             raise ValueError(f"slide {i}: missing 'heading'")
@@ -159,8 +164,25 @@ def render(spec, out):
     return out
 
 
+def gameplay_clip(name):
+    path = os.path.join(GAMEPLAY_DIR, f"{name}.mp4")
+    if not os.path.isfile(path):
+        print(f"downloading {name} gameplay (once)…", file=sys.stderr)
+        with urllib.request.urlopen(GAMEPLAY_URL + f"{name}.mp4", timeout=60) as r:
+            data = r.read()
+        if hashlib.sha256(data).hexdigest() != GAMEPLAY[name]:
+            raise RuntimeError(f"{name} gameplay download failed its checksum")
+        os.makedirs(GAMEPLAY_DIR, exist_ok=True)
+        with open(path + ".part", "wb") as f:
+            f.write(data)
+        os.replace(path + ".part", path)  # never leave a half-written clip in the cache
+    return path
+
+
 def encode(work, out, gameplay=None):
     video = ["-vf", "fps=30,format=yuv420p"]
+    if gameplay in GAMEPLAY:
+        gameplay = gameplay_clip(gameplay)
     if gameplay:  # looped and muted under the slides; narration stays the only audio
         top = round(TALL_W * H / W)
         video = ["-protocol_whitelist", "file", "-stream_loop", "-1", "-i", gameplay, "-filter_complex",
@@ -215,6 +237,7 @@ def selftest():
         raise AssertionError("validate accepted a missing gameplay file")
     except ValueError:
         pass
+    validate({**spec, "gameplay": "minecraft"})  # presets need no file until render
     print(f"selftest ok: {d:.1f}s")
 
 
