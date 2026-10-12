@@ -71,7 +71,7 @@ Change the voice with `REPO_VIDEO_VOICE`: `af_heart` (default), `am_michael` or 
 
 ### What to expect
 
-| | |
+| What | Details |
 |:--|:--|
 | **Output** | One MP4 with narration and burned-in captions, 120 seconds or less |
 | **Length** | 6–9 slides, about 210 words (roughly 40–90 seconds) |
@@ -119,7 +119,7 @@ The renderer also works on its own:
 {
   "gameplay": "minecraft",
   "slides": [
-    {"heading": "src/app.py", "narration": "This is where requests come in.", "lang": "python", "code": "def main(): ..."}
+    {"heading": "src/app.py", "narration": "Requests start here.", "lang": "python", "code": "def main(): ..."}
   ]
 }
 ```
